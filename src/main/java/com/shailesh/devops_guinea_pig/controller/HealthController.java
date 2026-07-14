@@ -15,4 +15,12 @@ public class HealthController {
                 "application","devops-guinea-pig"
         );
     }
+    @GetMapping("/")
+    public Map<String, String> home() {
+        return Map.of(
+                "message", "Hello from devops-guinea-pig!",
+                "version", "v1"
+        );
+    }
+
 }

@@ -1,0 +1,51 @@
+replicaCount: 2
+
+image:
+  repository: 553066146922.dkr.ecr.ap-south-1.amazonaws.com/devops-guinea-pig
+  tag: "v2"
+  pullPolicy: IfNotPresent
+
+service:
+  type: LoadBalancer
+  port: 80
+  targetPort: 8080
+
+probes:
+  liveness:
+    type: httpGet     # tcpSocket → httpGet
+    path: /health      # आपला custom endpoint
+    initialDelaySeconds: 30
+    periodSeconds: 10
+  readiness:
+    type: httpGet      # tcpSocket → httpGet
+    path: /health
+    initialDelaySeconds: 20
+    periodSeconds: 10
+
+resources:
+  requests:
+    cpu: 250m
+    memory: 512Mi
+  limits:
+    cpu: 500m
+    memory: 1024Mi
+
+autoscaling:
+  enabled: false
+  minReplicas: 2
+  maxReplicas: 6
+  targetCPUUtilizationPercentage: 70
+
+ingress:
+  enabled: false
+  className: alb
+  annotations:
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+  host: devops-guinea-pig.example.com
+
+env: []
+
+serviceAccount:
+  create: true
+  name: ""
