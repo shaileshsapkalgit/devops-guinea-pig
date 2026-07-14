@@ -19,7 +19,7 @@ public class HealthController {
     public Map<String, String> home() {
         return Map.of(
                 "message", "Hello from devops-guinea-pig!",
-                "version", "v1"
+                "version", "v2"
         );
     }
 
