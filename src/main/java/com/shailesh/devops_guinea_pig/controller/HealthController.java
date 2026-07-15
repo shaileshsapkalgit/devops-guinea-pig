@@ -29,5 +29,12 @@ public class HealthController {
                 "version", "v7"
         );
     }
+    @GetMapping("/bye")
+    public Map<String, String> bye() {
+        return Map.of(
+                "message", "goodbye world",
+                "version", "v8"
+        );
+    }
 
 }
