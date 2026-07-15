@@ -18,7 +18,7 @@ public class HealthController {
     @GetMapping("/")
     public Map<String, String> home() {
         return Map.of(
-                "message", "Hello from hinjewadi...!!!",
+                "message", "Hello from devops-guinea-pig!",
                 "version", "v2"
         );
     }
