@@ -2,7 +2,7 @@ replicaCount: 2
 
 image:
   repository: 553066146922.dkr.ecr.ap-south-1.amazonaws.com/devops-guinea-pig
-  tag: "cde92f7"
+  tag: "20a5945"
   pullPolicy: IfNotPresent
 
 service:
