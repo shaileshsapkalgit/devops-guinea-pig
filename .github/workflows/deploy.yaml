@@ -5,6 +5,9 @@ on:
     branches:
       - main
 
+permissions:
+  contents: write
+
 env:
   AWS_REGION: ap-south-1
   ECR_REPOSITORY: 553066146922.dkr.ecr.ap-south-1.amazonaws.com/devops-guinea-pig
