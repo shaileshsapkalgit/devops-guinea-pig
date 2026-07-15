@@ -41,17 +41,14 @@ jobs:
         run: |
           docker push $ECR_REPOSITORY:${{ steps.vars.outputs.IMAGE_TAG }}
 
-      - name: Update kubeconfig
+      - name: Update image tag in values.yaml
         run: |
-          aws eks update-kubeconfig --region $AWS_REGION --name $EKS_CLUSTER_NAME
+          sed -i "s|tag: .*|tag: \"${{ steps.vars.outputs.IMAGE_TAG }}\"|" helm/devops-guinea-pig/values.yaml
 
-      - name: Install Helm
-        uses: azure/setup-helm@v4
-        with:
-          version: v3.17.0
-
-      - name: Deploy with Helm
+      - name: Commit and push updated values.yaml
         run: |
-          helm upgrade --install devops-guinea-pig ./helm/devops-guinea-pig \
-            --namespace dev --create-namespace \
-            --set image.tag=${{ steps.vars.outputs.IMAGE_TAG }}
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add helm/devops-guinea-pig/values.yaml
+          git commit -m "Update image tag to ${{ steps.vars.outputs.IMAGE_TAG }} [skip ci]"
+          git push origin main
