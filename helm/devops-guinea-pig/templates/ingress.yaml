@@ -10,14 +10,13 @@ metadata:
 spec:
   ingressClassName: {{ .Values.ingress.className }}
   rules:
-    - host: {{ .Values.ingress.host }}
-      http:
+    - http:
         paths:
-          - path: /
-            pathType: Prefix
+          - path: {{ .Values.ingress.path }}
+            pathType: ImplementationSpecific
             backend:
               service:
                 name: {{ include "devops-guinea-pig.fullname" . }}
                 port:
                   number: {{ .Values.service.port }}
-  {{- end }}
+{{- end }}

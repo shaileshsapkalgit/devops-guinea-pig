@@ -6,18 +6,18 @@ image:
   pullPolicy: IfNotPresent
 
 service:
-  type: LoadBalancer
+  type: ClusterIP
   port: 80
   targetPort: 8080
 
 probes:
   liveness:
-    type: httpGet     # tcpSocket → httpGet
-    path: /health      # आपला custom endpoint
+    type: httpGet
+    path: /health
     initialDelaySeconds: 30
     periodSeconds: 10
   readiness:
-    type: httpGet      # tcpSocket → httpGet
+    type: httpGet
     path: /health
     initialDelaySeconds: 20
     periodSeconds: 10
@@ -37,12 +37,12 @@ autoscaling:
   targetCPUUtilizationPercentage: 70
 
 ingress:
-  enabled: false
-  className: alb
+  enabled: true
+  className: nginx
   annotations:
-    alb.ingress.kubernetes.io/scheme: internet-facing
-    alb.ingress.kubernetes.io/target-type: ip
-  host: devops-guinea-pig.example.com
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+  host: ""
+  path: /devops-guinea-pig(/|$)(.*)
 
 env: []
 
