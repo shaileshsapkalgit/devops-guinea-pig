@@ -1,0 +1,14 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: devops-guinea-pig
+  description: Spring Boot application deployed to EKS via ArgoCD
+  annotations:
+    github.com/project-slug: shaileshsapkalgit/devops-guinea-pig
+  tags:
+    - java
+    - spring-boot
+spec:
+  type: service
+  lifecycle: production
+  owner: guests
