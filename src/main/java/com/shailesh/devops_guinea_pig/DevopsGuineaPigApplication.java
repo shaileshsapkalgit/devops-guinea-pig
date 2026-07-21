@@ -10,5 +10,4 @@ public class DevopsGuineaPigApplication {
 		SpringApplication.run(DevopsGuineaPigApplication.class, args);
 		System.out.println("Hello world!! !");
 	}
-
 }

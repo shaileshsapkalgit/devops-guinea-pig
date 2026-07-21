@@ -20,7 +20,7 @@ public class HealthController {
     public Map<String, String> home() {
         return Map.of(
                 "message", "Hello from devops-guinea-pig!",
-                "version", "v2"
+                "version", "v2-Hello from ArgoCD!"
         );
     }
     @GetMapping("/hello")
