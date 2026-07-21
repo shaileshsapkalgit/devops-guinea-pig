@@ -3,7 +3,7 @@ replicaCount: 2
 image:
 
   repository: 748754852456.dkr.ecr.ap-south-1.amazonaws.com/devops-guinea-pig    # account ID बदललं
-  tag: "cde92f7"    # हे पण नवीन ECR मध्ये अजून नाहीये, पुढच्या push नंतर बदलेल
+  tag: "af96983"
   pullPolicy: IfNotPresent
 
 service:
