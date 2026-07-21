@@ -8,6 +8,10 @@ metadata:
   tags:
     - java
     - spring-boot
+  links:
+    - url: https://ap-south-1.console.aws.amazon.com/ecr/repositories/private/748754852456/devops-guinea-pig?region=ap-south-1
+      title: ECR Repository
+      icon: docker
 spec:
   type: service
   lifecycle: production

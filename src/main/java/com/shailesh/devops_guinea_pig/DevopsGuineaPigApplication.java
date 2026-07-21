@@ -8,6 +8,6 @@ public class DevopsGuineaPigApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(DevopsGuineaPigApplication.class, args);
-		System.out.println("Hello world!! !");
+		System.out.println("Hello world");
 	}
 }
