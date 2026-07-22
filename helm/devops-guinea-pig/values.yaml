@@ -3,7 +3,7 @@ replicaCount: 2
 image:
 
   repository: 748754852456.dkr.ecr.ap-south-1.amazonaws.com/devops-guinea-pig    # account ID बदललं
-  tag: "78ad742"
+  tag: "f4b6bf0"
   pullPolicy: IfNotPresent
 
 service:
