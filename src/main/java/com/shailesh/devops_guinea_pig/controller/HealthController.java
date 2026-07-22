@@ -16,7 +16,7 @@ public class HealthController {
                 "application","devops-guinea-pig"
         );
     }
-    @GetMapping("/")
+    @GetMapping("/home")
     public Map<String, String> home() {
         return Map.of(
                 "message", "Hello from devops-guinea-pig!",

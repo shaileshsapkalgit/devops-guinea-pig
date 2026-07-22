@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevOps Guinea Pig</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+          font-family: 'Segoe UI', system-ui, sans-serif;
+          background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+          color: #e2e8f0;
+          min-height: 100vh;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 24px;
+        }
+        .card {
+          max-width: 640px;
+          width: 100%;
+          background: rgba(255,255,255,0.03);
+          border: 1px solid rgba(255,255,255,0.08);
+          border-radius: 20px;
+          padding: 48px 40px;
+          backdrop-filter: blur(10px);
+        }
+        .badge {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          background: rgba(34,197,94,0.12);
+          color: #4ade80;
+          border: 1px solid rgba(34,197,94,0.3);
+          padding: 6px 14px;
+          border-radius: 999px;
+          font-size: 13px;
+          font-weight: 600;
+          margin-bottom: 24px;
+        }
+        .badge::before {
+          content: "";
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          background: #4ade80;
+          box-shadow: 0 0 8px #4ade80;
+        }
+        h1 {
+          font-size: 40px;
+          font-weight: 800;
+          letter-spacing: -0.02em;
+          background: linear-gradient(90deg, #60a5fa, #a78bfa);
+          -webkit-background-clip: text;
+          background-clip: text;
+          color: transparent;
+          margin-bottom: 12px;
+        }
+        p.subtitle {
+          color: #94a3b8;
+          font-size: 16px;
+          margin-bottom: 32px;
+          line-height: 1.6;
+        }
+        .grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 12px;
+          margin-bottom: 8px;
+        }
+        .stat {
+          background: rgba(255,255,255,0.04);
+          border: 1px solid rgba(255,255,255,0.06);
+          border-radius: 12px;
+          padding: 16px;
+        }
+        .stat .label {
+          font-size: 12px;
+          color: #64748b;
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
+          margin-bottom: 6px;
+        }
+        .stat .value {
+          font-size: 15px;
+          font-weight: 600;
+          color: #e2e8f0;
+          font-family: 'Courier New', monospace;
+        }
+        .footer {
+          margin-top: 32px;
+          padding-top: 24px;
+          border-top: 1px solid rgba(255,255,255,0.08);
+          font-size: 13px;
+          color: #64748b;
+          display: flex;
+          justify-content: space-between;
+        }
+        .footer a { color: #60a5fa; text-decoration: none; }
+    </style>
+</head>
+<body>
+<div class="card">
+    <div class="badge">Service Online</div>
+    <h1>DevOps Guinea Pig</h1>
+    <p class="subtitle">Spring Boot application deployed on AWS EKS via Terraform, Helm, and ArgoCD.</p>
+    <div class="grid">
+        <div class="stat">
+            <div class="label">Platform</div>
+            <div class="value">AWS EKS</div>
+        </div>
+        <div class="stat">
+            <div class="label">Delivery</div>
+            <div class="value">GitOps / ArgoCD</div>
+        </div>
+        <div class="stat">
+            <div class="label">Routing</div>
+            <div class="value">NGINX Ingress</div>
+        </div>
+        <div class="stat">
+            <div class="label">Registry</div>
+            <div class="value">Amazon ECR</div>
+        </div>
+    </div>
+    <div class="footer">
+        <span>Built by Shailesh Sapkal</span>
+        <a href="/health">/health check →</a>
+    </div>
+</div>
+</body>
+</html>
