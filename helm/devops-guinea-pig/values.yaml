@@ -2,7 +2,7 @@ replicaCount: 2
 
 image:
   repository: java1829/devops-guinea-pig
-  tag: "10680e9"
+  tag: "b8a85ba"
   pullPolicy: IfNotPresent
 
 service:
