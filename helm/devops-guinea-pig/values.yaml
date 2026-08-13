@@ -1,9 +1,8 @@
 replicaCount: 2
 
 image:
-
-  repository: 748754852456.dkr.ecr.ap-south-1.amazonaws.com/devops-guinea-pig    # account ID बदललं
-  tag: "f4b6bf0"
+  repository: java1829/devops-guinea-pig
+  tag: "v1"
   pullPolicy: IfNotPresent
 
 service:
@@ -38,7 +37,7 @@ autoscaling:
   targetCPUUtilizationPercentage: 70
 
 ingress:
-  enabled: true
+  enabled: false
   className: nginx
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /$2
