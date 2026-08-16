@@ -1,15 +1,12 @@
 replicaCount: 2
-
 image:
   repository: java1829/devops-guinea-pig
   tag: "b8a85ba"
   pullPolicy: IfNotPresent
-
 service:
   type: ClusterIP
   port: 80
   targetPort: 8080
-
 probes:
   liveness:
     type: httpGet
@@ -21,7 +18,6 @@ probes:
     path: /health
     initialDelaySeconds: 20
     periodSeconds: 10
-
 resources:
   requests:
     cpu: 250m
@@ -29,23 +25,23 @@ resources:
   limits:
     cpu: 500m
     memory: 1024Mi
-
 autoscaling:
   enabled: false
   minReplicas: 2
   maxReplicas: 6
   targetCPUUtilizationPercentage: 70
-
 ingress:
   enabled: true
   className: nginx
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /$2
-  host: ""
+    cert-manager.io/cluster-issuer: selfsigned-issuer
+  host: "localhost"
   path: /devops-guinea-pig(/|$)(.*)
-
+  tls:
+    enabled: true
+    secretName: devops-guinea-pig-tls
 env: []
-
 serviceAccount:
   create: true
   name: ""
