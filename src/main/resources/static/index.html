@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DevOps Guinea Pig</title>
+    <title>DevOps Guinea Pig - Version 1</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -23,6 +23,7 @@
           border: 1px solid rgba(255,255,255,0.08);
           border-radius: 20px;
           padding: 48px 40px;
+          text-align: center;
           backdrop-filter: blur(10px);
         }
         .badge {
@@ -46,46 +47,21 @@
           background: #4ade80;
           box-shadow: 0 0 8px #4ade80;
         }
-        h1 {
-          font-size: 40px;
-          font-weight: 800;
-          letter-spacing: -0.02em;
-          background: linear-gradient(90deg, #60a5fa, #a78bfa);
+        .version-title {
+          font-size: 64px;
+          font-weight: 900;
+          letter-spacing: -0.03em;
+          background: linear-gradient(90deg, #38bdf8, #818cf8, #c084fc);
           -webkit-background-clip: text;
           background-clip: text;
           color: transparent;
-          margin-bottom: 12px;
+          margin-bottom: 16px;
         }
         p.subtitle {
           color: #94a3b8;
-          font-size: 16px;
+          font-size: 18px;
           margin-bottom: 32px;
           line-height: 1.6;
-        }
-        .grid {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 12px;
-          margin-bottom: 8px;
-        }
-        .stat {
-          background: rgba(255,255,255,0.04);
-          border: 1px solid rgba(255,255,255,0.06);
-          border-radius: 12px;
-          padding: 16px;
-        }
-        .stat .label {
-          font-size: 12px;
-          color: #64748b;
-          text-transform: uppercase;
-          letter-spacing: 0.05em;
-          margin-bottom: 6px;
-        }
-        .stat .value {
-          font-size: 15px;
-          font-weight: 600;
-          color: #e2e8f0;
-          font-family: 'Courier New', monospace;
         }
         .footer {
           margin-top: 32px;
@@ -101,30 +77,12 @@
 </head>
 <body>
 <div class="card">
-    <div class="badge">Service Online</div>
-    <h1>DevOps Guinea Pig</h1>
-    <p class="subtitle">Spring Boot application deployed on AWS EKS via Terraform, Helm, and ArgoCD.</p>
-    <div class="grid">
-        <div class="stat">
-            <div class="label">Platform</div>
-            <div class="value">AWS EKS</div>
-        </div>
-        <div class="stat">
-            <div class="label">Delivery</div>
-            <div class="value">GitOps / ArgoCD</div>
-        </div>
-        <div class="stat">
-            <div class="label">Routing</div>
-            <div class="value">NGINX Ingress</div>
-        </div>
-        <div class="stat">
-            <div class="label">Registry</div>
-            <div class="value">Amazon ECR</div>
-        </div>
-    </div>
+    <div class="badge">Application Online</div>
+    <h1 class="version-title">VERSION 1</h1>
+    <p class="subtitle">DevOps Guinea Pig — Spring Boot & Kind Local Setup</p>
     <div class="footer">
         <span>Built by Shailesh Sapkal</span>
-        <a href="/devops-guinea-pig/health">/health check →</a>
+        <a href="/health">/health check →</a>
     </div>
 </div>
 </body>
