@@ -26,7 +26,7 @@ public class HealthController {
     @GetMapping("/hello")
     public Map<String, String> hello() {
         return Map.of(
-                "message", "hello world",
+                "message", "hello 14 Aug",
                 "version", "v10"
         );
     }

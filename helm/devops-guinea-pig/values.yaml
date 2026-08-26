@@ -1,16 +1,12 @@
 replicaCount: 2
-
 image:
-
-  repository: 748754852456.dkr.ecr.ap-south-1.amazonaws.com/devops-guinea-pig    # account ID बदललं
-  tag: "be8d7c0"
+  repository: java1829/devops-guinea-pig
+  tag: "dd352c7"
   pullPolicy: IfNotPresent
-
 service:
   type: ClusterIP
   port: 80
   targetPort: 8080
-
 probes:
   liveness:
     type: httpGet
@@ -22,7 +18,6 @@ probes:
     path: /health
     initialDelaySeconds: 20
     periodSeconds: 10
-
 resources:
   requests:
     cpu: 250m
@@ -30,23 +25,23 @@ resources:
   limits:
     cpu: 500m
     memory: 1024Mi
-
 autoscaling:
   enabled: false
   minReplicas: 2
   maxReplicas: 6
   targetCPUUtilizationPercentage: 70
-
 ingress:
   enabled: true
   className: nginx
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /$2
-  host: ""
+    cert-manager.io/cluster-issuer: selfsigned-issuer
+  host: "localhost"
   path: /devops-guinea-pig(/|$)(.*)
-
+  tls:
+    enabled: true
+    secretName: devops-guinea-pig-tls
 env: []
-
 serviceAccount:
   create: true
   name: ""

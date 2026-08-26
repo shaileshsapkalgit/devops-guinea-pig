@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: devops-guinea-pig
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/shaileshsapkalgit/devops-guinea-pig.git
+    targetRevision: feature/kind-local-setup
+    path: helm/devops-guinea-pig
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: dev
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
