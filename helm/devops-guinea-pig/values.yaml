@@ -1,7 +1,7 @@
 replicaCount: 2
 image:
   repository: java1829/devops-guinea-pig
-  tag: "afb88a5"
+  tag: "2f806df"
   pullPolicy: IfNotPresent
 service:
   type: ClusterIP
@@ -44,7 +44,7 @@ ingress:
 otel:
   initImage:
     repository: ghcr.io/open-telemetry/opentelemetry-operator/autoinstrumentation-java
-    tag: latest
+    tag: "2f806df"
 env:
   - name: JAVA_TOOL_OPTIONS
     value: "-javaagent:/otel/opentelemetry-javaagent.jar"
