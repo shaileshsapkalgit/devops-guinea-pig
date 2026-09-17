@@ -1,13 +1,19 @@
 replicaCount: 2
 image:
   repository: java1829/devops-guinea-pig
-  tag: "8011be4"
+  tag: "2f806df"
   pullPolicy: IfNotPresent
 service:
   type: ClusterIP
   port: 80
   targetPort: 8080
 probes:
+  startup:
+    type: httpGet
+    path: /health
+    initialDelaySeconds: 10
+    periodSeconds: 10
+    failureThreshold: 12
   liveness:
     type: httpGet
     path: /health

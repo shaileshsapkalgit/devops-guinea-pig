@@ -40,6 +40,18 @@ spec:
           env:
             {{- toYaml .Values.env | nindent 12 }}
           {{- end }}
+          startupProbe:
+            {{- if eq .Values.probes.startup.type "httpGet" }}
+            httpGet:
+              path: {{ .Values.probes.startup.path }}
+              port: http
+            {{- else }}
+            tcpSocket:
+              port: http
+            {{- end }}
+            initialDelaySeconds: {{ .Values.probes.startup.initialDelaySeconds }}
+            periodSeconds: {{ .Values.probes.startup.periodSeconds }}
+            failureThreshold: {{ .Values.probes.startup.failureThreshold }}
           livenessProbe:
             {{- if eq .Values.probes.liveness.type "httpGet" }}
             httpGet:
