@@ -33,7 +33,7 @@ public class HealthController {
     @GetMapping("/bye")
     public Map<String, String> bye() {
         return Map.of(
-                "message", "goodbye world",
+                "message", "bye bye world",
                 "version", "v8"
         );
     }
