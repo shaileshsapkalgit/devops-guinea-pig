@@ -69,3 +69,13 @@ env:
 serviceAccount:
   create: true
   name: ""
+
+db:
+  host: ""            # rikama theva, mhanje chart swatah mysql service cha nav vaprel
+  port: "3306"
+  name: guineapig
+  user: guinea
+  password: "guinea123"
+  rootPassword: "root123"
+  storage: 1Gi
+  image: mysql:8.0

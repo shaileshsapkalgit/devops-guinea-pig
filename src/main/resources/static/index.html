@@ -12,78 +12,258 @@
           color: #e2e8f0;
           min-height: 100vh;
           display: flex;
-          align-items: center;
+          align-items: flex-start;
           justify-content: center;
           padding: 24px;
         }
         .card {
-          max-width: 640px;
+          max-width: 820px;
           width: 100%;
           background: rgba(255,255,255,0.03);
           border: 1px solid rgba(255,255,255,0.08);
           border-radius: 20px;
-          padding: 48px 40px;
-          text-align: center;
+          padding: 40px;
           backdrop-filter: blur(10px);
         }
+        .header { text-align: center; margin-bottom: 32px; }
         .badge {
-          display: inline-flex;
-          align-items: center;
-          gap: 8px;
-          background: rgba(34,197,94,0.12);
-          color: #4ade80;
+          display: inline-flex; align-items: center; gap: 8px;
+          background: rgba(34,197,94,0.12); color: #4ade80;
           border: 1px solid rgba(34,197,94,0.3);
-          padding: 6px 14px;
-          border-radius: 999px;
-          font-size: 13px;
-          font-weight: 600;
-          margin-bottom: 24px;
+          padding: 6px 14px; border-radius: 999px;
+          font-size: 13px; font-weight: 600; margin-bottom: 20px;
         }
         .badge::before {
-          content: "";
-          width: 8px;
-          height: 8px;
-          border-radius: 50%;
-          background: #4ade80;
-          box-shadow: 0 0 8px #4ade80;
+          content: ""; width: 8px; height: 8px; border-radius: 50%;
+          background: #4ade80; box-shadow: 0 0 8px #4ade80;
         }
         .version-title {
-          font-size: 64px;
-          font-weight: 900;
-          letter-spacing: -0.03em;
+          font-size: 48px; font-weight: 900; letter-spacing: -0.03em;
           background: linear-gradient(90deg, #38bdf8, #818cf8, #c084fc);
-          -webkit-background-clip: text;
-          background-clip: text;
-          color: transparent;
-          margin-bottom: 16px;
+          -webkit-background-clip: text; background-clip: text; color: transparent;
+          margin-bottom: 8px;
         }
-        p.subtitle {
-          color: #94a3b8;
-          font-size: 18px;
-          margin-bottom: 32px;
-          line-height: 1.6;
+        p.subtitle { color: #94a3b8; font-size: 16px; line-height: 1.6; }
+
+        h2 { font-size: 18px; margin: 8px 0 16px; color: #f1f5f9; }
+
+        form { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .field { display: flex; flex-direction: column; gap: 6px; }
+        .field label { font-size: 13px; color: #94a3b8; font-weight: 600; }
+        .field input {
+          background: rgba(15,23,42,0.6);
+          border: 1px solid rgba(255,255,255,0.12);
+          border-radius: 10px; padding: 11px 14px;
+          color: #e2e8f0; font-size: 15px; font-family: inherit;
         }
+        .field input:focus {
+          outline: 2px solid #818cf8; outline-offset: 1px; border-color: transparent;
+        }
+        .field .err { color: #f87171; font-size: 12px; min-height: 14px; }
+        .actions { grid-column: 1 / -1; display: flex; gap: 12px; align-items: center; }
+        button {
+          font-family: inherit; font-size: 14px; font-weight: 600;
+          border: none; border-radius: 10px; padding: 11px 20px; cursor: pointer;
+        }
+        button:focus-visible { outline: 2px solid #818cf8; outline-offset: 2px; }
+        .btn-primary { background: linear-gradient(90deg, #38bdf8, #818cf8); color: #0f172a; }
+        .btn-ghost { background: transparent; color: #94a3b8; border: 1px solid rgba(255,255,255,0.15); }
+        .btn-small { padding: 6px 12px; font-size: 13px; }
+        .btn-edit { background: rgba(56,189,248,0.15); color: #7dd3fc; }
+        .btn-del  { background: rgba(248,113,113,0.15); color: #fca5a5; }
+        #msg { font-size: 14px; }
+        #msg.ok { color: #4ade80; }
+        #msg.bad { color: #f87171; }
+
+        .table-wrap { overflow-x: auto; margin-top: 8px; }
+        table { width: 100%; border-collapse: collapse; font-size: 14px; }
+        th, td { text-align: left; padding: 12px 10px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+        th { color: #94a3b8; font-weight: 600; font-size: 13px; }
+        .row-actions-inner { display: flex; gap: 8px; }
+        .empty { color: #64748b; text-align: center; padding: 28px 0; }
+        hr { border: none; border-top: 1px solid rgba(255,255,255,0.08); margin: 32px 0; }
+
         .footer {
-          margin-top: 32px;
-          padding-top: 24px;
+          margin-top: 32px; padding-top: 24px;
           border-top: 1px solid rgba(255,255,255,0.08);
-          font-size: 13px;
-          color: #64748b;
-          display: flex;
-          justify-content: space-between;
+          font-size: 13px; color: #64748b;
+          display: flex; justify-content: space-between;
         }
         .footer a { color: #60a5fa; text-decoration: none; }
+
+        @media (max-width: 600px) {
+          form { grid-template-columns: 1fr; }
+          .card { padding: 28px 20px; }
+        }
     </style>
 </head>
 <body>
 <div class="card">
-    <div class="badge">-Application Online-</div>
-    <h1 class="version-title">VERSION 1</h1>
-    <p class="subtitle">DevOps Guinea Pig — Spring Boot & Kind Local Setup</p>
+    <div class="header">
+        <div class="badge">Application Online</div>
+        <h1 class="version-title">VERSION 1</h1>
+        <p class="subtitle">DevOps Guinea Pig — Spring Boot &amp; Kind Local Setup</p>
+    </div>
+
+    <h2 id="form-title">Add person</h2>
+    <form id="person-form" novalidate>
+        <input type="hidden" id="id">
+
+        <div class="field">
+            <label for="name">Name</label>
+            <input id="name" name="name" type="text" autocomplete="off">
+            <span class="err" id="err-name"></span>
+        </div>
+        <div class="field">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" autocomplete="off">
+            <span class="err" id="err-email"></span>
+        </div>
+        <div class="field">
+            <label for="age">Age</label>
+            <input id="age" name="age" type="number" min="0" max="120">
+            <span class="err" id="err-age"></span>
+        </div>
+        <div class="field">
+            <label for="city">City</label>
+            <input id="city" name="city" type="text" autocomplete="off">
+            <span class="err" id="err-city"></span>
+        </div>
+
+        <div class="actions">
+            <button type="submit" class="btn-primary" id="submit-btn">Save person</button>
+            <button type="button" class="btn-ghost" id="cancel-btn" hidden>Cancel edit</button>
+            <span id="msg" role="status"></span>
+        </div>
+    </form>
+
+    <hr>
+
+    <h2>Saved people</h2>
+    <div class="table-wrap">
+        <table>
+            <thead>
+            <tr><th>ID</th><th>Name</th><th>Email</th><th>Age</th><th>City</th><th></th></tr>
+            </thead>
+            <tbody id="rows"></tbody>
+        </table>
+        <div class="empty" id="empty" hidden>No one saved yet. Add the first person above.</div>
+    </div>
+
     <div class="footer">
         <span>Built by Shailesh Sapkal</span>
-        <a href="/health">/health check →</a>
+        <a href="#" id="health-link">/health check →</a>
     </div>
 </div>
+
+<script>
+    const BASE = location.pathname.replace(/\/(index\.html)?$/, '');
+    const API = BASE + '/api/persons';
+    const form = document.getElementById('person-form');
+    const fields = ['name', 'email', 'age', 'city'];
+    const msg = document.getElementById('msg');
+
+    function showMsg(text, ok) {
+        msg.textContent = text;
+        msg.className = ok ? 'ok' : 'bad';
+        if (text) setTimeout(() => { msg.textContent = ''; }, 4000);
+    }
+
+    function clearErrors() {
+        fields.forEach(f => document.getElementById('err-' + f).textContent = '');
+    }
+
+    function resetForm() {
+        form.reset();
+        document.getElementById('id').value = '';
+        document.getElementById('form-title').textContent = 'Add person';
+        document.getElementById('submit-btn').textContent = 'Save person';
+        document.getElementById('cancel-btn').hidden = true;
+        clearErrors();
+    }
+
+    function escapeHtml(s) {
+        return String(s).replace(/[&<>"']/g, c =>
+            ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    }
+
+    async function loadPersons() {
+        const res = await fetch(API);
+        const list = await res.json();
+        const tbody = document.getElementById('rows');
+        document.getElementById('empty').hidden = list.length > 0;
+        tbody.innerHTML = list.map(p => `
+            <tr>
+                <td>${p.id}</td>
+                <td>${escapeHtml(p.name)}</td>
+                <td>${escapeHtml(p.email)}</td>
+                <td>${p.age}</td>
+                <td>${escapeHtml(p.city)}</td>
+                <td>
+                    <div class="row-actions-inner">
+                        <button class="btn-small btn-edit" data-edit="${p.id}">Edit</button>
+                        <button class="btn-small btn-del" data-del="${p.id}">Delete</button>
+                    </div>
+                </td>
+            </tr>`).join('');
+    }
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        clearErrors();
+        const id = document.getElementById('id').value;
+        const body = {
+            name: document.getElementById('name').value.trim(),
+            email: document.getElementById('email').value.trim(),
+            age: document.getElementById('age').value === '' ? null : Number(document.getElementById('age').value),
+            city: document.getElementById('city').value.trim()
+        };
+        const res = await fetch(id ? `${API}/${id}` : API, {
+            method: id ? 'PUT' : 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(body)
+        });
+        const data = await res.json().catch(() => ({}));
+
+        if (res.ok) {
+            showMsg(id ? 'Person updated' : 'Person saved', true);
+            resetForm();
+            loadPersons();
+        } else if (res.status === 400) {
+            Object.entries(data).forEach(([field, text]) => {
+                const el = document.getElementById('err-' + field);
+                if (el) el.textContent = text;
+            });
+            showMsg('Fix the highlighted fields', false);
+        } else {
+            showMsg(data.error || 'Something went wrong', false);
+        }
+    });
+
+    document.getElementById('rows').addEventListener('click', async (e) => {
+        const editId = e.target.dataset.edit;
+        const delId = e.target.dataset.del;
+        if (editId) {
+            const p = await (await fetch(`${API}/${editId}`)).json();
+            document.getElementById('id').value = p.id;
+            fields.forEach(f => document.getElementById(f).value = p[f]);
+            document.getElementById('form-title').textContent = 'Edit person #' + p.id;
+            document.getElementById('submit-btn').textContent = 'Update person';
+            document.getElementById('cancel-btn').hidden = false;
+            document.getElementById('name').focus();
+        }
+        if (delId && confirm('Delete this person?')) {
+            const res = await fetch(`${API}/${delId}`, { method: 'DELETE' });
+            showMsg(res.ok ? 'Person deleted' : 'Could not delete', res.ok);
+            loadPersons();
+        }
+    });
+
+    document.getElementById('cancel-btn').addEventListener('click', resetForm);
+
+    document.getElementById('health-link').href = BASE + '/health';
+
+    loadPersons();
+</script>
 </body>
 </html>

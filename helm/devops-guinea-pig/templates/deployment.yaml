@@ -18,6 +18,12 @@ spec:
     spec:
       serviceAccountName: {{ include "devops-guinea-pig.serviceAccountName" . }}
       initContainers:
+        - name: wait-for-mysql
+          image: busybox:1.36
+          command:
+            - sh
+            - -c
+            - until nc -z {{ include "devops-guinea-pig.fullname" . }}-mysql 3306; do echo "waiting for mysql"; sleep 3; done
         - name: otel-agent-init
           image: "{{ .Values.otel.initImage.repository }}:{{ .Values.otel.initImage.tag }}"
           command: ["cp", "/javaagent.jar", "/otel/opentelemetry-javaagent.jar"]
@@ -36,10 +42,18 @@ spec:
             - name: otel-agent
               mountPath: /otel
               readOnly: true
-          {{- if .Values.env }}
+          envFrom:
+            - configMapRef:
+                name: {{ include "devops-guinea-pig.fullname" . }}-db-config
           env:
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: guinea-db-secret
+                  key: DB_PASSWORD
+            {{- if .Values.env }}
             {{- toYaml .Values.env | nindent 12 }}
-          {{- end }}
+            {{- end }}
           startupProbe:
             {{- if eq .Values.probes.startup.type "httpGet" }}
             httpGet:

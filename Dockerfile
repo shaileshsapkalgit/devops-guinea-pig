@@ -24,6 +24,8 @@ RUN addgroup -S appgroup && adduser -S appuser -G appgroup
 
 WORKDIR /app
 
+RUN mkdir -p /app/logs && chown -R appuser:appgroup /app
+
 # ४. Builder स्टेजमधून फक्त JAR फाईल कॉपी करणे आणि तिची मालकी (ownership) non-root user ला देणे
 COPY --from=builder --chown=appuser:appgroup /app/target/devops-guinea-pig-0.0.1-SNAPSHOT.jar app.jar
 

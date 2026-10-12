@@ -1,0 +1,76 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "devops-guinea-pig.fullname" . }}-mysql
+  labels:
+    {{- include "devops-guinea-pig.labels" . | nindent 4 }}
+spec:
+  clusterIP: None
+  ports:
+    - name: mysql
+      port: 3306
+      targetPort: mysql
+  selector:
+    app: {{ include "devops-guinea-pig.fullname" . }}-mysql
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ include "devops-guinea-pig.fullname" . }}-mysql
+  labels:
+    {{- include "devops-guinea-pig.labels" . | nindent 4 }}
+spec:
+  serviceName: {{ include "devops-guinea-pig.fullname" . }}-mysql
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ include "devops-guinea-pig.fullname" . }}-mysql
+  template:
+    metadata:
+      labels:
+        app: {{ include "devops-guinea-pig.fullname" . }}-mysql
+    spec:
+      containers:
+        - name: mysql
+          image: {{ .Values.db.image }}
+          ports:
+            - name: mysql
+              containerPort: 3306
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: guinea-db-secret
+                  key: MYSQL_ROOT_PASSWORD
+            - name: MYSQL_DATABASE
+              value: {{ .Values.db.name | quote }}
+            - name: MYSQL_USER
+              value: {{ .Values.db.user | quote }}
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: guinea-db-secret
+                  key: DB_PASSWORD
+          readinessProbe:
+            exec:
+              command: ["sh", "-c", "mysqladmin ping -h 127.0.0.1 -uroot -p$MYSQL_ROOT_PASSWORD"]
+            initialDelaySeconds: 20
+            periodSeconds: 10
+          resources:
+            requests:
+              cpu: 100m
+              memory: 256Mi
+            limits:
+              cpu: 500m
+              memory: 768Mi
+          volumeMounts:
+            - name: mysql-data
+              mountPath: /var/lib/mysql
+  volumeClaimTemplates:
+    - metadata:
+        name: mysql-data
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: {{ .Values.db.storage }}

@@ -31,3 +31,8 @@ build/
 
 ### VS Code ###
 .vscode/
+# add to your .gitignore (local H2 database files)
+data/
+
+logs/
+data/
