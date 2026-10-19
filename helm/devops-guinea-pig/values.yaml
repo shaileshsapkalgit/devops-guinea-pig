@@ -1,7 +1,7 @@
 replicaCount: 2
 image:
   repository: java1829/devops-guinea-pig
-  tag: "bc350db"
+  tag: "jenkins-8b212a4-9"
   pullPolicy: IfNotPresent
 service:
   type: ClusterIP
