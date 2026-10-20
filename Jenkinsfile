@@ -8,7 +8,7 @@ pipeline {
     }
 
     parameters {
-        booleanParam(name: 'UPDATE_GITOPS', defaultValue: false,
+        booleanParam(name: 'UPDATE_GITOPS', defaultValue: true,
                      description: 'Update image tag in helm values.yaml and push to main (Argo CD will deploy)')
     }
 
