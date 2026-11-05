@@ -1,0 +1,63 @@
+name: AI Failure Analyzer
+
+on:
+  workflow_run:
+    workflows: ["Build and Push to Docker Hub"]
+    types: [completed]
+
+permissions:
+  actions: read
+  contents: read
+
+jobs:
+  analyze:
+    if: ${{ github.event.workflow_run.conclusion == 'failure' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Get failed logs
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RUN_ID: ${{ github.event.workflow_run.id }}
+        run: |
+          gh run view "$RUN_ID" --repo "${{ github.repository }}" --log-failed | tail -n 200 > failed.log || true
+
+      - name: Mask sensitive data
+        run: |
+          sed -i -E 's/(password|token|secret|key)[=: ]+[^ ]+/\1=***REDACTED***/Ig' failed.log
+
+      - name: AI analysis
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          pip install requests -q
+          python .github/scripts/analyze.py failed.log > analysis.md
+
+      - name: Show in Summary
+        env:
+          RUN_URL: ${{ github.event.workflow_run.html_url }}
+          BRANCH: ${{ github.event.workflow_run.head_branch }}
+        run: |
+          echo "## AI Failure Analysis" >> $GITHUB_STEP_SUMMARY
+          echo "Branch: \`$BRANCH\` | [Open failed run]($RUN_URL)" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          cat analysis.md >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "_AI suggestion only. No changes were made. Please review before applying._" >> $GITHUB_STEP_SUMMARY
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
