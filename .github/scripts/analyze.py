@@ -28,7 +28,9 @@ try:
         json={"contents": [{"parts": [{"text": prompt}]}]},
         timeout=60,
     )
-    r.raise_for_status()
+    if r.status_code != 200:
+        print(f"AI analysis is not available (HTTP {r.status_code}). Details: {r.text[:300]}")
+        sys.exit(0)
     print(r.json()["candidates"][0]["content"]["parts"][0]["text"])
 except Exception as e:
-    print(f"AI analysis is not available right now ({type(e).__name__}). Please check the failed run logs manually.")
+    print(f"AI analysis is not available ({type(e).__name__}: {e}). Please check the failed run logs manually.")
