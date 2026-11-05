@@ -1,6 +1,6 @@
 import os, sys, requests
 
-   MODEL = os.environ.get("GEMINI_MODEL", "gemini-3.8-flash")
+MODEL = os.environ.get("GEMINI_MODEL", "gemini-3.8-flash")
 log = open(sys.argv[1]).read()[-12000:]
 
 if not log.strip():
